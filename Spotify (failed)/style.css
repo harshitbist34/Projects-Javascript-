@@ -1,0 +1,120 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Oswald:wght@200..700&family=Roboto+Condensed:wght@100..900&family=Varela+Round&display=swap');
+
+
+body{
+    background-color: rgb(172, 195, 170);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    font-family: "Oswald", sans-serif;
+}
+
+nav ul{
+    display: flex;
+    list-style-type: none;
+    height: 65px;
+    background-color: black;
+    color :azure;
+    align-items: center;
+    gap : 15px
+}
+.brand img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+
+
+.brand{
+    display : flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-family: "Varela Round", sans-serif;
+    font-weight: bolder;
+    
+}
+
+.container{
+    min-height: 70vh;
+    color :rgba(255, 255, 255, 0.897);
+    background-color: rgb(0, 0, 0);
+    font-family: "Varela Round", sans-serif;
+    margin :20px auto ;
+    width : 75%;
+    border-radius: 20px;
+    padding: 15px;
+    background-image: url("img2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.bottom{
+    position : sticky ;
+    height : 95px ;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    bottom : 0 ;
+    color : white
+}
+
+#myProgressBar{
+    width : 80%;
+    cursor : pointer
+}
+
+.icons{
+    margin-top: 17px;
+}
+.songItem{
+    color: rgb(8, 11, 14);
+    background-color: aliceblue;
+    display : flex ;
+    width : 70%;
+    margin : 12px 0px ;
+    align-self: center;
+    justify-content: space-between;
+    border-radius: 30px;
+
+}
+
+.songItem img {
+    height : 50px;
+    width :  50px;
+    margin :0px 20px;
+    border-radius: 10px;
+    border-radius: 30px;
+}
+
+.songListPlay {
+    margin-left :auto ;
+    margin-right : 20px;
+}
+
+.timespan i{
+    cursor : pointer;
+}
+
+.songItemContainer{
+    margin-top : 40px
+}
+
+.songinfo{
+    position : absolute;
+    left : 10vw;
+}
+
+.songinfo img{
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
