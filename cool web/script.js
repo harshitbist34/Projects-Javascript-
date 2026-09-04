@@ -104,7 +104,8 @@ document.querySelectorAll(".elem").forEach(function (elem) {
 
         gsap.to(elem.querySelectorAll("img"), {
             opacity: 0,
-            // ease: "power1",
+            ease: "power1",
+            duration : 0.5,
         });
     });
 
