@@ -1,0 +1,387 @@
+SNAKE GAME — PROJECT FLASHBACK
+PROJECT SETUP
+
+• HTML → board, score, high score, timer, start/restart modals.
+
+• CSS → grid board, blocks, snake, food, modal styling.
+
+• JS → game logic, movement, collision, food, score, timer.
+
+
+
+
+DOM SELECTION
+
+• querySelector() → selects required HTML elements.
+
+• Examples:
+board, startButton, modal, scoreElement, timeElement.
+
+
+
+
+BOARD / GRID
+
+• blockHeight & blockWidth → size of each grid block.
+
+• cols = board.clientWidth / blockWidth
+
+• rows = board.clientHeight / blockHeight
+
+• Math.floor() → removes decimal values.
+
+• Nested loops create every grid block:
+
+for(row)
+for(col)
+
+• Each block is stored using coordinates:
+
+blocks[${row}-${col}] = block;
+
+• Example:
+
+blocks["4-13"] → actual div at row 4, column 13.
+
+
+
+
+SNAKE DATA
+
+• Snake is stored as an array of objects:
+
+snake = [
+{x: 4, y: 13},
+{x: 4, y: 14},
+{x: 4, y: 15}
+];
+
+• snake[0] → current head.
+
+• x → row.
+
+• y → column.
+
+
+
+
+SNAKE MOVEMENT
+
+• Head position is calculated according to direction.
+
+left → y - 1
+right → y + 1
+up → x - 1
+down → x + 1
+
+• unshift(head)
+→ adds new head at beginning.
+
+• pop()
+→ removes tail.
+
+Normal movement:
+
+unshift(head) + pop()
+
+→ snake moves without growing.
+
+
+
+
+RENDER FUNCTION
+
+• render() updates the visual game.
+
+Steps:
+
+Calculate new head.
+Check boundary collision.
+Check food collision.
+Remove old "fill" classes.
+Add new head.
+Remove tail if food wasn't eaten.
+Add "fill" class to every snake segment.
+
+• classList.add("fill")
+→ visually displays snake.
+
+• classList.remove("fill")
+→ clears previous snake position.
+
+
+
+
+FOOD SYSTEM
+
+• Food gets random coordinates:
+
+x = Math.floor(Math.random() * rows)
+
+y = Math.floor(Math.random() * cols)
+
+• Food is displayed using:
+
+classList.add("food")
+
+• Food collision:
+
+head.x == food.x && head.y == food.y
+
+• When food is eaten:
+
+→ ateFood = true
+
+→ remove food class
+
+→ score += 10
+
+→ generate new food
+
+→ DON'T pop the tail
+
+Result:
+
+Snake grows by 1 block.
+
+
+
+
+SCORE
+
+• score += 10 → increases score.
+
+• scoreElement.innerHTML = score → updates UI.
+
+HIGH SCORE:
+
+• localStorage stores high score.
+
+localStorage.setItem("highscore", highScore)
+
+• On page load:
+
+Number(localStorage.getItem("highscore")) || 0
+
+• Number() converts stored string into a number.
+
+• || 0 gives 0 if no previous score exists.
+
+
+
+
+TIMER
+
+• timerIntervalId → stores timer interval.
+
+• Every 1000ms:
+
+→ split minutes and seconds
+
+→ increase seconds
+
+→ if seconds == 59:
+minutes++
+seconds = 0
+
+→ update timeElement.
+
+• 1000ms = 1 second.
+
+
+
+
+GAME LOOP
+
+• setInterval(render, 200)
+
+• render() runs every 200ms.
+
+• Therefore snake movement speed ≈ 5 updates/second.
+
+• intervalId stores the game loop so it can be stopped.
+
+
+
+
+COLLISION
+
+BOUNDARY:
+
+head.x < 0
+
+head.x >= rows
+
+head.y < 0
+
+head.y >= cols
+
+If true:
+
+→ clearInterval()
+
+→ show game-over modal.
+
+
+
+
+START GAME
+
+• Start button:
+
+→ hides modal
+
+→ starts game interval
+
+→ starts timer interval.
+
+
+
+
+RESTART GAME
+
+• Remove old snake classes.
+
+• Remove old food class.
+
+• Reset score.
+
+• Reset timer.
+
+• Reset snake position.
+
+• Reset direction.
+
+• Generate new food.
+
+• Restart game interval.
+
+
+
+
+KEYBOARD CONTROL
+
+• keydown event detects keyboard input.
+
+ArrowUp → up
+
+ArrowDown → down
+
+ArrowLeft → left
+
+ArrowRight → right
+
+• direction variable controls snake movement.
+
+
+
+
+IMPORTANT JS CONCEPTS USED
+
+• DOM manipulation
+
+• querySelector()
+
+• createElement()
+
+• appendChild()
+
+• classList.add/remove()
+
+• Arrays
+
+• Objects
+
+• for loops
+
+• forEach()
+
+• unshift()
+
+• pop()
+
+• if/else
+
+• Math.floor()
+
+• Math.random()
+
+• setInterval()
+
+• clearInterval()
+
+• localStorage
+
+• addEventListener()
+
+• Template literals
+
+• Destructuring
+
+• map()
+
+• Number()
+
+
+
+
+CORE GAME LOGIC
+
+Input
+
+↓
+
+Direction
+
+↓
+
+Calculate new head
+
+↓
+
+Check boundary
+
+↓
+
+Check food
+
+↓
+
+Remove old snake
+
+↓
+
+unshift(new head)
+
+↓
+
+Food eaten?
+
+├── YES → don't pop() → grow
+
+└── NO → pop() → normal movement
+
+↓
+
+Render snake
+
+↓
+
+Repeat every 200ms
+
+
+
+
+KEY TAKEAWAY
+
+The snake is NOT physically moving.
+
+The program repeatedly:
+
+Calculates a new head coordinate.
+Adds that coordinate to the snake array.
+Removes the tail.
+Updates CSS classes.
+
+The rapid replacement of old and new positions creates the
+visual illusion of movement.
